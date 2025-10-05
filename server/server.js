@@ -13,11 +13,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const MONGO = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/mern-auth";
+const MONGO = process.env.MONGO_URI;
 const PORT = process.env.PORT || 5000;
-const DEFAULT_OWNER_USERNAME = process.env.DEFAULT_OWNER_USERNAME || "owner";
+const DEFAULT_OWNER_USERNAME = process.env.DEFAULT_OWNER_USERNAME || "vettai";
 const DEFAULT_OWNER_PASSWORD =
-  process.env.DEFAULT_OWNER_PASSWORD || "Owner@123";
+  process.env.DEFAULT_OWNER_PASSWORD || "vettai@123";
 
 mongoose
   .connect(MONGO, { useNewUrlParser: true, useUnifiedTopology: true })
