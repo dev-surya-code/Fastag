@@ -89,7 +89,7 @@ export default function WorkerDashboard({ worker }) {
   };
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/transactions/all")
+      .get("https://vettai-fastag.onrender.com/api/transactions/all")
       .then((res) => {
         // get unique vehicle numbers
         const vehicles = [...new Set(res.data.map((t) => t.vehicleNumber))];
@@ -141,7 +141,10 @@ export default function WorkerDashboard({ worker }) {
       const newTx = { ...transactionForm, vehicleNumber: txVehicle, worker };
 
       // Add transaction to backend
-      await axios.post("http://localhost:5000/api/transactions/add", newTx);
+      await axios.post(
+        "https://vettai-fastag.onrender.com/api/transactions/add",
+        newTx
+      );
 
       // Only show popup if transaction type is "PENDING"
       if (transactionForm.transactionType.toUpperCase() === "PENDING") {
@@ -209,10 +212,13 @@ export default function WorkerDashboard({ worker }) {
       const worker = localStorage.getItem("username");
       const logoutTime = new Date().toISOString();
 
-      await axios.post("http://localhost:5000/api/auth/workers/logout", {
-        worker,
-        logoutTime,
-      });
+      await axios.post(
+        "https://vettai-fastag.onrender.com/api/auth/workers/logout",
+        {
+          worker,
+          logoutTime,
+        }
+      );
       localStorage.removeItem("token");
       localStorage.removeItem("username");
 
@@ -273,10 +279,12 @@ export default function WorkerDashboard({ worker }) {
 
   // fetch all vehicle numbers for suggestions
   useEffect(() => {
-    axios.get("http://localhost:5000/api/transactions/all").then((res) => {
-      const vehicles = [...new Set(res.data.map((t) => t.vehicleNumber))];
-      setSuggestions(vehicles);
-    });
+    axios
+      .get("https://vettai-fastag.onrender.com/api/transactions/all")
+      .then((res) => {
+        const vehicles = [...new Set(res.data.map((t) => t.vehicleNumber))];
+        setSuggestions(vehicles);
+      });
   }, []);
 
   // fetch pending amount when vehicle changes
@@ -284,7 +292,7 @@ export default function WorkerDashboard({ worker }) {
   // Fetch pending vehicles on mount
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/transactions/all")
+      .get("https://vettai-fastag.onrender.com/api/transactions/all")
       .then((res) => {
         const vehicles = [...new Set(res.data.map((t) => t.vehicleNumber))];
 
@@ -328,7 +336,7 @@ export default function WorkerDashboard({ worker }) {
         filtered.map(async (vehicle) => {
           try {
             const res = await axios.get(
-              `http://localhost:5000/api/transactions/pending/${vehicle}`
+              `https://vettai-fastag.onrender.com/api/transactions/pending/${vehicle}`
             );
             return { vehicle, pending: parseFloat(res.data.totalPending) || 0 };
           } catch {
@@ -345,7 +353,7 @@ export default function WorkerDashboard({ worker }) {
         allVehicles.map(async (vehicle) => {
           try {
             const res = await axios.get(
-              `http://localhost:5000/api/transactions/pending/${vehicle}`
+              `https://vettai-fastag.onrender.com/api/transactions/pending/${vehicle}`
             );
             return { vehicle, pending: parseFloat(res.data.totalPending) || 0 };
           } catch {
@@ -363,7 +371,9 @@ export default function WorkerDashboard({ worker }) {
     setSuggestions([]);
 
     axios
-      .get(`http://localhost:5000/api/transactions/pending/${vehicle}`)
+      .get(
+        `https://vettai-fastag.onrender.com/api/transactions/pending/${vehicle}`
+      )
       .then((res) => setPendingAmount(res.data.totalPending || 0))
       .catch(() => setPendingAmount(0));
   };
@@ -380,11 +390,14 @@ export default function WorkerDashboard({ worker }) {
       const closedTime = new Date().toISOString();
       const logoutTime = new Date().toISOString();
 
-      await axios.post("http://localhost:5000/api/auth/workers/shiftclose", {
-        worker,
-        logoutTime,
-        closedTime,
-      });
+      await axios.post(
+        "https://vettai-fastag.onrender.com/api/auth/workers/shiftclose",
+        {
+          worker,
+          logoutTime,
+          closedTime,
+        }
+      );
 
       localStorage.removeItem("token");
       localStorage.removeItem("username");

@@ -14,7 +14,9 @@ export default function OwnerDashboard() {
   const inputRef = useRef(null);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/auth/owner/activities")
+      .get(
+        "https://vettai-fastag.onrender.com/api/auth/owner/activities"
+      )
       .then((res) => setRecords(res.data))
       .catch((err) => console.error(err));
   }, []);
@@ -23,7 +25,7 @@ export default function OwnerDashboard() {
     const fetchTransactions = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/transactions/all"
+          "https://vettai-fastag.onrender.com/api/transactions/all"
         );
         setTransactions(res.data);
       } catch (err) {

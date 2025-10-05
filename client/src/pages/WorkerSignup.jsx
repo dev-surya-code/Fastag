@@ -19,7 +19,7 @@ export default function WorkerSignup() {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/worker/signup",
+        "https://vettai-fastag.onrender.com/api/auth/worker/signup",
         form
       );
       setMsg(res.data.msg);

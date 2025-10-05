@@ -29,7 +29,7 @@ export default function OwnerLogin() {
     setLoading(true);
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/owner/login",
+        "https://vettai-fastag.onrender.com/api/auth/owner/login",
         form
       );
 

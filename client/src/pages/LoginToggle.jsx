@@ -22,8 +22,8 @@ export default function LoginSingleButton() {
     try {
       const url =
         role === "owner"
-          ? "http://localhost:5000/api/auth/owner/login"
-          : "http://localhost:5000/api/auth/worker/login";
+          ? "https://vettai-fastag.onrender.com/api/auth/owner/login"
+          : "https://vettai-fastag.onrender.com/api/auth/worker/login";
 
       const res = await axios.post(url, form);
 

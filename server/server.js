@@ -15,9 +15,9 @@ app.use(express.json());
 
 const MONGO = process.env.MONGO_URI;
 const PORT = process.env.PORT || 5000;
-const DEFAULT_OWNER_USERNAME = process.env.DEFAULT_OWNER_USERNAME || "vettai";
+const DEFAULT_OWNER_USERNAME = process.env.DEFAULT_OWNER_USERNAME || "owner";
 const DEFAULT_OWNER_PASSWORD =
-  process.env.DEFAULT_OWNER_PASSWORD || "vettai@123";
+  process.env.DEFAULT_OWNER_PASSWORD || "Owner@123";
 
 mongoose
   .connect(MONGO, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -51,7 +51,7 @@ app.post("/api/transactions/add", (req, res) => {
     console.error("Error adding transaction:", error);
   }
 });
-app.get("/", (req, res) => res.send("MERN Auth Backend is running"));
+app.get("/", (req, res) => res.send("Backend is running"));
 
 app.listen(PORT, () => console.log("Server running on port", PORT));
 // Assuming you have an Express app instance named 'app'
